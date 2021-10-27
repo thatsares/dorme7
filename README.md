@@ -1,3 +1,5 @@
+![alt text](https://github.com/thatsares/dorme7/blob/main/dorme.png?raw=true)
+
 # dorme7
 Fábrica de Projetos II - Grupo 14
 
