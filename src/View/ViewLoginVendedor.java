@@ -7,6 +7,7 @@ package View;
 import conexoes.MySQL;
 import javax.swing.JOptionPane;
 import objetos.Vendedor;
+import View.ViewCadastroProduto;
 
 
 /**
@@ -24,8 +25,8 @@ public class ViewLoginVendedor extends javax.swing.JFrame {
      */
     
         MySQL conectar = new MySQL(); //acessar os métodos de conexao com o banco
-        Vendedor novoVendedor = new Vendedor(); //acessar os atributos da classe cliente
-
+        Vendedor novoVendedor = new Vendedor(); //acessar os atributos da classe Vendedor
+        ViewCadastroProduto cadastroProduto = new ViewCadastroProduto();
 
     public ViewLoginVendedor() {
         initComponents();
@@ -130,6 +131,7 @@ public class ViewLoginVendedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
    private void buscarCliente(Vendedor novoVendedor){
         this.conectar.conectaBanco();
         
@@ -146,7 +148,8 @@ public class ViewLoginVendedor extends javax.swing.JFrame {
                     + "vendedor_cidade,"
                     + "vendedor_estado,"
                     + "vendedor_idade,"
-                    + "vendedor_casas"
+                    + "vendedor_id"
+
                  + " FROM"
                      + " vendedores"
                  + " WHERE"
@@ -155,6 +158,7 @@ public class ViewLoginVendedor extends javax.swing.JFrame {
             );
             
             while(this.conectar.getResultSet().next()){
+                cadastroProduto.setVendedorID(this.conectar.getResultSet().getInt(9));
                 novoVendedor.setNome(this.conectar.getResultSet().getString(1));
                 novoVendedor.setCnpj(this.conectar.getResultSet().getString(2));
                 novoVendedor.setSenha(this.conectar.getResultSet().getString(3));
@@ -163,7 +167,6 @@ public class ViewLoginVendedor extends javax.swing.JFrame {
                 novoVendedor.setCidade(this.conectar.getResultSet().getString(6));
                 novoVendedor.setEstado(this.conectar.getResultSet().getString(7));
                 novoVendedor.setIdade(this.conectar.getResultSet().getString(8));
-                novoVendedor.setCasas(this.conectar.getResultSet().getString(9));
            }
             
            if(novoVendedor.getNome() == ""){
@@ -202,6 +205,9 @@ public class ViewLoginVendedor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Login Realizado com sucesso!");
             setVisible(false);
+            cadastroProduto.show();
+            
+
 
         }else
         {

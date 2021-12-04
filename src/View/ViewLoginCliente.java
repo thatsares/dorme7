@@ -7,6 +7,7 @@ package View;
 import conexoes.MySQL;
 import javax.swing.JOptionPane;
 import objetos.Cliente;
+import View.Loja;
 
 
 /**
@@ -25,6 +26,7 @@ public class ViewLoginCliente extends javax.swing.JFrame {
     
         MySQL conectar = new MySQL(); //acessar os métodos de conexao com o banco
         Cliente novoCliente = new Cliente(); //acessar os atributos da classe cliente
+        Loja novaLoja = new Loja();
 
 
     public ViewLoginCliente() {
@@ -182,6 +184,45 @@ public class ViewLoginCliente extends javax.swing.JFrame {
 
     }
 
+      private void buscarSenha(Cliente novoCliente){
+        this.conectar.conectaBanco();
+        
+        String consultaCpf = this.campoCpf.getText();
+                
+            try {
+            this.conectar.executarSQL(
+                   "call getClienteSenha(" + consultaCpf + ");"
+            );
+            
+            while(this.conectar.getResultSet().next()){
+                novoCliente.setNome(this.conectar.getResultSet().getString(1));
+                novoCliente.setCpf(this.conectar.getResultSet().getString(2));
+                novoCliente.setSenha(this.conectar.getResultSet().getString(3));
+                novoCliente.setSexo(this.conectar.getResultSet().getString(4));
+                novoCliente.setEndereco(this.conectar.getResultSet().getString(5));
+                novoCliente.setCidade(this.conectar.getResultSet().getString(6));
+                novoCliente.setEstado(this.conectar.getResultSet().getString(7));
+                novoCliente.setIdade(this.conectar.getResultSet().getString(8));
+                novoCliente.setCA(this.conectar.getResultSet().getString(9));
+           }
+            
+           if(novoCliente.getNome() == ""){
+
+           }
+
+           
+        } catch (Exception e) {            
+            System.out.println("Erro ao consultar cliente " +  e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar cliente");
+            
+        }finally{
+
+            this.conectar.fechaBanco();
+        }     
+
+    }
+   
+   
     
     private void campoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCpfActionPerformed
 
@@ -195,6 +236,7 @@ public class ViewLoginCliente extends javax.swing.JFrame {
 
 
         buscarCliente(novoCliente);
+        buscarSenha(novoCliente);
         
         if(campoSenha.getText().equals(novoCliente.getSenha()))
         
@@ -204,6 +246,7 @@ public class ViewLoginCliente extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Login Realizado com sucesso!");
             setVisible(false);
+            novaLoja.show();
 
         }else
         {

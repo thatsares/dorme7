@@ -8,18 +8,27 @@ package View;
 import conexoes.MySQL;
 import javax.swing.JOptionPane;
 import objetos.Cliente;
+import hs.hs;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewCadastroCliente extends javax.swing.JFrame {
 
     MySQL conectar = new MySQL(); //acessar os métodos de conexao com o banco
     Cliente novoCliente = new Cliente(); //acessar os atributos da classe cliente
+    hs HS = new hs();
     
     public ViewCadastroCliente() {
         initComponents();
         setResizable(false);
     }
     
-    private void cadastraCliente(Cliente novoCliente){
+    
+    
+    private void cadastraCliente(Cliente novoCliente)throws NoSuchAlgorithmException,
+         UnsupportedEncodingException{
         this.conectar.conectaBanco(); 
         
         novoCliente.setNome(txtNome.getText());
@@ -341,7 +350,13 @@ public class ViewCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        cadastraCliente(novoCliente);    
+        try {    
+            cadastraCliente(novoCliente);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ViewCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ViewCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed

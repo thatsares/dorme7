@@ -14,6 +14,7 @@ public class ViewLogin extends javax.swing.JFrame {
 
     MySQL conectar = new MySQL(); //acessar os métodos de conexao com o banco
     ViewCadastroCliente cadastroCliente = new ViewCadastroCliente();
+    ViewCadastroVendedor cadastroVendedor = new ViewCadastroVendedor();
     ViewCadastroProduto cadastroProduto = new ViewCadastroProduto();
     
     
@@ -187,7 +188,7 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCadastroClienteActionPerformed
 
     private void botaoCadastroVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroVendedorActionPerformed
-        //new ViewCadastroVendedor().setVisible(true);
+        new ViewCadastroVendedor().setVisible(true);
     }//GEN-LAST:event_botaoCadastroVendedorActionPerformed
 
     /**
