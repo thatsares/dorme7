@@ -19,7 +19,7 @@ public class Vendedor {
     private String vendedor_cidade = "";
     private String vendedor_estado = "";
     private String vendedor_idade = "";
-    private String vendedor_casas = "";
+
 
 
 
@@ -88,13 +88,7 @@ public class Vendedor {
         this.vendedor_idade = idade;
     }
     
-    public String getCasas() {
-        return vendedor_casas;
-    }
 
-    public void setCasas(String CA) {
-        this.vendedor_casas = CA;
-    }
     
     
     public void limpaCliente(){
@@ -106,7 +100,7 @@ public class Vendedor {
     vendedor_cidade = "";
     vendedor_estado = "";
     vendedor_idade = "";
-    vendedor_casas = "";
+
     }   
     
 }
